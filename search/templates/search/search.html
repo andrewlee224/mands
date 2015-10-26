@@ -11,6 +11,7 @@
   <input type="submit" value="Submit">
 </form action="." method="get">
 Share this url: {{ request.build_absolute_uri }}
+{% autoescape off %}
 {% if not search_term %}
     <p>Please search for items</p>
 {% elif error %}
@@ -26,5 +27,6 @@ Share this url: {{ request.build_absolute_uri }}
 
     {% endfor %}
 {% endif %}
+{% endautoescape %}
 </body>
 </html>

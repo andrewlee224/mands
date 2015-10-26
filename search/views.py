@@ -24,7 +24,7 @@ def search(request):
             api_response = url_opener.open(
                 settings_dict['search_url'] + "?searchTerm=" + search_term)
 
-            api_response = json.load(api_response)
+            api_response = json.loads(api_response)
 
             context_dict['items'] = api_response['search']['results']
         except (urllib2.HTTPError, ValueError, KeyError):
