@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<form>
+  Search term:<br>
+  <input type="text" name="search_term">
+  <input type="submit" value="Submit">
+</form action="." method="get">
+Share this url: {{ request.build_absolute_uri }}
+{% if not search_term %}
+    <p>Please search for items</p>
+{% elif error %}
+    <p>API error occured - could not retrieve results</p>
+{% elif not items %}
+    <p>No results found</p>
+{% else %}
+    {% for item in items %}
+        <p>Name: {{ item.title }}</p>
+        <p>Price {{ item.price.listPriceText }}</p>
+        <p>Rating: {{ item.averageRatingText }}</p>
+        <p>--------------------------------------------------</p>
+
+    {% endfor %}
+{% endif %}
+</body>
+</html>
