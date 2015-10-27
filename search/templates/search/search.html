@@ -20,8 +20,9 @@ Share this url: {{ request.build_absolute_uri }}
     <p>No results found</p>
 {% else %}
     {% for item in items %}
-        <p>Name: {{ item.title }}</p>
-        <p>Price {{ item.price.listPriceText }}</p>
+        <p>Name: {{ item.title }} {% if item.isNew %} <b>NEW</b>{% endif %} {% if item.price.isSalePrice %}<b>SALE</b>{% endif %}</p>
+        <p>Brand: {{ item.brand }}</p>
+        <p>Price: {{ item.price.listPriceText }} {% if item.price.desc %}({{ item.price.desc }}){% endif %}</p>
         <p>Rating: {{ item.averageRatingText }}</p>
         <p>--------------------------------------------------</p>
 
