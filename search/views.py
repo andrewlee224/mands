@@ -1,3 +1,4 @@
+import urllib
 import urllib2
 import json
 
@@ -21,13 +22,16 @@ def search(request):
         ]
 
         try:
+            #import ipdb; ipdb.set_trace()
             api_response = url_opener.open(
-                settings_dict['search_url'] + "?searchTerm=" + search_term)
+                settings_dict['search_url'] + "?"
+                + urllib.urlencode({'searchTerm': search_term})
+            )
 
-            api_response = json.loads(api_response)
+            api_response = json.load(api_response)
 
             context_dict['items'] = api_response['search']['results']
-        except (urllib2.HTTPError, ValueError, KeyError):
+        except (urllib2.HTTPError, ValueError, KeyError, TypeError):
             error_found = True
         else:
             error_found = False

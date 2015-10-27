@@ -9,7 +9,7 @@ class SearchTestCase(TestCase):
 
     @patch('urllib2.OpenerDirector')
     def test_wrong_format_api_response(self, mock_opener):
-        mock_opener.return_value.open.return_value = """
+        mock_opener.return_value.open.return_value.read.return_value = """
         {"something": "wrong"}
         """
 
@@ -20,7 +20,7 @@ class SearchTestCase(TestCase):
 
     @patch('urllib2.OpenerDirector')
     def test_mangled_api_response(self, mock_opener):
-        mock_opener.return_value.open.return_value = """
+        mock_opener.return_value.open.return_value.read.return_value = """
         "sometsdlkfjsdfkjlhing":sdfdsf: wrong"
         """
 
@@ -31,7 +31,7 @@ class SearchTestCase(TestCase):
 
     @patch('urllib2.OpenerDirector')
     def test_proper_api_response(self, mock_opener):
-        mock_opener.return_value.open.return_value = """
+        mock_opener.return_value.open.return_value.read.return_value = """
         {
         "search":
             {
@@ -60,7 +60,7 @@ class SearchTestCase(TestCase):
 
     @patch('urllib2.OpenerDirector')
     def test_no_results_api_response(self, mock_opener):
-        mock_opener.return_value.open.return_value = """
+        mock_opener.return_value.open.return_value.read.return_value = """
         {
         "search":
             {
